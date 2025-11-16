@@ -11,6 +11,6 @@ from qiskit_aer import AerSimulator
 sim = AerSimulator()
 job = sim.run(qc, shots=1)
 result = job.result()
-random_string = list(result.get_counts().keys())[0]
-print(random_string)
+random_bit = list(result.get_counts().keys())[0]
+print(random_bit)
 
