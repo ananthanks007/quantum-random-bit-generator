@@ -5,5 +5,5 @@ app = FastAPI()
 
 @app.get("/qrbg")
 def qrbg(bits: int = 32):
-    random_string = quantum_random_bit(bits)
-    return {"random_string": random_string}
+    random_bit = quantum_random_bit(bits)
+    return {"random_bit": random_bit}
