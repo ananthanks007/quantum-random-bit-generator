@@ -1,16 +1,9 @@
-import numpy as np
-from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
-N = int(input("Enter the number of qubits: "))
-qr = QuantumRegister(N, 'q')
-cr = ClassicalRegister(N, 'c')
-qc = QuantumCircuit(qr, cr)
-qc.h(qr) # Applying Hadamard gate to all qubits
-qc.measure(qr, cr)
+from fastapi import FastAPI
+from qrbg import quantum_random_bit
 
-from qiskit_aer import AerSimulator
-sim = AerSimulator()
-job = sim.run(qc, shots=1)
-result = job.result()
-random_bit = list(result.get_counts().keys())[0]
-print(random_bit)
+app = FastAPI()
 
+@app.get("/qrbg")
+def qrbg(bits: int = 32):
+    random_string = quantum_random_bit(bits)
+    return {"random_string": random_string}
